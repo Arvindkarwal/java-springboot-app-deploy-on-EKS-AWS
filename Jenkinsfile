@@ -51,6 +51,7 @@ pipeline {
                     sh """
                     git config --global user.name 'Arvindkarwal'
                     git config --global user.email 'arvindkarwal002@gmail.com'
+                    git config --global --add safe.directory "\$(pwd)"
                     git add ${HELM_CHART_PATH}/values.yaml
                     git commit -m 'Update Docker image tag to ${DOCKER_TAG}'
                     git push origin main

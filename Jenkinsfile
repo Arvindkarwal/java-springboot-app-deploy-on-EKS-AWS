@@ -47,16 +47,18 @@ pipeline {
                     sh """
                     sed -i '/image:/,/^[^ ]/ s|tag:.*|tag: ${DOCKER_TAG}|' ${HELM_CHART_PATH}/values.yaml
                     """
+
                     // Commit and push the updated Helm chart
-                    sh """
-                    git config --global user.name 'Arvindkarwal'
-                    git config --global user.email 'arvindkarwal002@gmail.com'
-                    git config --global --add safe.directory "\$(pwd)"
-                    git checkout dev-branch
-                    git add .
-                    git commit -m 'Update Docker image tag to ${DOCKER_TAG}'
-                    git push origin dev-branch --force
-                    """
+
+                    sh 'git config --global user.name "Arvindkarwal"'
+                    sh 'git config --global user.email "arvindkarwal002@gmail.com"'
+                    sh 'git config --global --add safe.directory "\$(pwd)"'
+                    sh 'git checkout dev-branch'
+                    sh 'git add .'
+                    sh "git commit -m 'Update Docker image tag to ${DOCKER_TAG}'"
+                    withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/java-springboot-app.git HEAD:dev-branch'
+                    }
                 }
             }
         }

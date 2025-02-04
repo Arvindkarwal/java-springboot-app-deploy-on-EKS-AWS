@@ -53,7 +53,6 @@ pipeline {
                     sh 'git config --global user.name "Arvindkarwal"'
                     sh 'git config --global user.email "arvindkarwal002@gmail.com"'
                     sh 'git config --global --add safe.directory "\$(pwd)"'
-                    sh 'git checkout dev-branch'
                     sh 'git add .'
                     sh "git commit -m 'Update Docker image tag to ${DOCKER_TAG}'"
                     withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {

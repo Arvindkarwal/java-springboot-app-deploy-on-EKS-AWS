@@ -54,7 +54,7 @@ pipeline {
                     git config --global --add safe.directory "\$(pwd)"
                     git add .
                     git commit -m 'Update Docker image tag to ${DOCKER_TAG}'
-                    git push origin dev-branch
+                    git push origin dev-branch --force
                     """
                 }
             }

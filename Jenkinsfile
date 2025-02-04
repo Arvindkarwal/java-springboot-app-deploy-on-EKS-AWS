@@ -30,7 +30,8 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh 'apk add --no-cache docker'
+                    sh 'apk add --no-cache docker git'
+                    sh 'docker buildx create --use --name multiarch-builder'
                     sh 'docker buildx build --platform linux/amd64,linux/arm64 -t ${DOCKER_IMAGE}:${DOCKER_TAG} --push .'
                 }
             }

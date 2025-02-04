@@ -32,7 +32,9 @@ pipeline {
                 script {
                     sh 'apk add --no-cache docker git'
                     sh 'docker buildx create --use --name multiarch-builder'
-                    sh 'docker buildx build -t ${DOCKER_IMAGE}:${DOCKER_TAG} --push .'
+                    withDockerRegistry(credentialsId: 'docker_hub', url: 'https://hub.docker.com/') {
+                        sh 'docker buildx build -t ${DOCKER_IMAGE}:${DOCKER_TAG} --push .'
+                     }
                 }
             }
         }

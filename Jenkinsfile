@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3.9-eclipse-temurin-21-alpine'  // Using JDK 21 with Maven
-            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Mounting Docker socket
+            args '-v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.m2:/root/.m2'  // Mounting Docker socket and .m2 directory
         }
     }
 

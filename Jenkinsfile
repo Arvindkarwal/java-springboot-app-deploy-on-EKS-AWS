@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.9-eclipse-temurin-21-alpine'  // Using JDK 21 with Maven
+            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Mounting Docker socket
+        }
+    }
 
     environment {
         DOCKER_IMAGE = 'arvind005/java-app'
@@ -35,7 +40,7 @@ pipeline {
         stage('Update Helm Chart') {
             steps {
                 script {
-                    // Updated sed command to target the image tag precisely
+                    // Update the image tag in values.yaml
                     sh """
                     sed -i '/image:/,/^[^ ]/ s|tag:.*|tag: ${DOCKER_TAG}|' ${HELM_CHART_PATH}/values.yaml
                     """
@@ -44,7 +49,7 @@ pipeline {
                     git config --global user.name 'Arvindkarwal'
                     git config --global user.email 'arvindkarwal002@gmail.com'
                     git add ${HELM_CHART_PATH}/values.yaml
-                    git commit -m 'Update Docker image tag to jv${DOCKER_TAG}'
+                    git commit -m 'Update Docker image tag to ${DOCKER_TAG}'
                     git push origin main
                     """
                 }

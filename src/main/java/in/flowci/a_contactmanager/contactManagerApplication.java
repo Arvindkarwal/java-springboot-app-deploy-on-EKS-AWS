@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 })
 public class contactManagerApplication{
     public static void main(String[] args) {
-        // code
+        // code comment --
         SpringApplication app = new SpringApplication(contactManagerApplication.class);
         app.run(args);
     }

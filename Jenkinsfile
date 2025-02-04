@@ -52,6 +52,8 @@ pipeline {
                     git config --global user.name 'Arvindkarwal'
                     git config --global user.email 'arvindkarwal002@gmail.com'
                     git config --global --add safe.directory "\$(pwd)"
+                    git fetch origin
+                    git checkout dev-branch
                     git add .
                     git commit -m 'Update Docker image tag to ${DOCKER_TAG}'
                     git push origin dev-branch --force

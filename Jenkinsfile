@@ -53,14 +53,15 @@ pipeline {
                     """
 
                     // Commit and push the updated Helm chart
-
-                    sh 'git config --global user.name "Arvindkarwal"'
-                    sh 'git config --global user.email "arvindkarwal002@gmail.com"'
-                    sh 'git config --global --add safe.directory "\$(pwd)"'
-                    sh 'git add .'
-                    sh "git commit -m 'Update Docker image tag to ${DOCKER_TAG}'"
-                    withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git HEAD:main'
+                    dir('helm_chart') {
+                         sh 'git config --global user.name "Arvindkarwal"'
+                         sh 'git config --global user.email "arvindkarwal002@gmail.com"'
+                         sh 'git config --global --add safe.directory "\$(pwd)"'
+                         sh 'git add .'
+                         sh "git commit -m 'Update Docker image tag to ${DOCKER_TAG}'"
+                         withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                             sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git HEAD:main'
+                        }
                     }
                 }
             }

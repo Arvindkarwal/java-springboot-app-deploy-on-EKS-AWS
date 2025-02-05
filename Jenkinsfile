@@ -11,7 +11,7 @@ pipeline {
         DOCKER_IMAGE = 'arvind005/java-app'
         DOCKER_TAG = "jv${BUILD_NUMBER}"  // Dynamic tag with prefix 'jv'
         GIT_REPO = 'https://github.com/your-username/your-repo.git'
-        HELM_CHART_PATH = 'Java_Application'
+        HELM_CHART_PATH = 'helm_chart/Java_Application'
     }
 
     stages {
@@ -49,7 +49,6 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                          sh 'git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git'
                     }
-                    sh 'cd helm_chart'
                     sh 'ls'
                     // Update the image tag in values.yaml
                     sh """

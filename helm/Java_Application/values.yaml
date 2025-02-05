@@ -6,7 +6,7 @@ app:
 # Image configuration
 image:
   repository: arvind005/java-app
-  tag: jv21
+  tag: jv26
 
 # Deployment configuration
 deployment:

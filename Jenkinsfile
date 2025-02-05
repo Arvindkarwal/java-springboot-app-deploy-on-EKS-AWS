@@ -12,12 +12,30 @@ pipeline {
         DOCKER_TAG = "jv${BUILD_NUMBER}"  // Dynamic tag with prefix 'jv'
         GIT_REPO = 'https://github.com/your-username/your-repo.git'
         HELM_CHART_PATH = 'helm_chart/Java_Application'
+        SONAR_HOST_URL= 'http://54.234.132.39:9000'
+        SONAR_PROJECT_KEY= 'in.flowci.Java_Application'
     }
 
     stages {
         stage('Build') {
             steps {
                 sh 'mvn clean install'
+            }
+        }
+
+        stage('SonarQube Analysis'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'sonar_token', variable: 'SONAR_AUTH_TOKEN')]) {
+                    // Run SonarQube analysis
+                        sh """
+                            mvn sonar:sonar \
+                            -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                            -Dsonar.host.url=${SONAR_HOST_URL} \
+                            -Dsonar.token=${SONAR_AUTH_TOKEN}
+                        """
+                    }
+                }
             }
         }
 

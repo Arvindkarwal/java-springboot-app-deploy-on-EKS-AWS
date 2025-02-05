@@ -3,7 +3,6 @@ package in.flowci.a_contactmanager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.scheduling.annotation.Scheduled;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {

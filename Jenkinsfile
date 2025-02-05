@@ -45,11 +45,10 @@ pipeline {
                 script {
                     // clean up existing directory
                     sh 'rm -rf helm_chart'
-                     // Clone the Helm chart repository
+                     // Clone the helm_chart repository
                     withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                          sh 'git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git'
                     }
-                    sh 'ls'
                     // Update the image tag in values.yaml
                     sh """
                     sed -i '/image:/,/^[^ ]/ s|tag:.*|tag: ${DOCKER_TAG}|' ${HELM_CHART_PATH}/values.yaml

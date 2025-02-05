@@ -50,6 +50,7 @@ pipeline {
                          sh 'git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git'
                     }
                     sh 'cd helm_chart'
+                    sh 'ls'
                     // Update the image tag in values.yaml
                     sh """
                     sed -i '/image:/,/^[^ ]/ s|tag:.*|tag: ${DOCKER_TAG}|' ${HELM_CHART_PATH}/values.yaml

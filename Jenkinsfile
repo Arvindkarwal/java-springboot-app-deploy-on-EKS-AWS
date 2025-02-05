@@ -11,7 +11,7 @@ pipeline {
         DOCKER_IMAGE = 'arvind005/java-app'
         DOCKER_TAG = "jv${BUILD_NUMBER}"  // Dynamic tag with prefix 'jv'
         GIT_REPO = 'https://github.com/your-username/your-repo.git'
-        HELM_CHART_PATH = 'helm/Java_Application'
+        HELM_CHART_PATH = 'Java_Application'
     }
 
     stages {
@@ -56,7 +56,7 @@ pipeline {
                     sh 'git add .'
                     sh "git commit -m 'Update Docker image tag to ${DOCKER_TAG}'"
                     withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/java-springboot-app.git HEAD:dev-branch'
+                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git HEAD:main'
                     }
                 }
             }

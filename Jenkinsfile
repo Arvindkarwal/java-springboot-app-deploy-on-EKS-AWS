@@ -43,6 +43,8 @@ pipeline {
         stage('Update Helm Chart') {
             steps {
                 script {
+                    // clean up existing directory
+                    sh 'rm -rf helm_chart'
                      // Clone the Helm chart repository
                     withCredentials([usernamePassword(credentialsId: 'git_creds', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                          sh 'git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Arvindkarwal/helm_chart.git'

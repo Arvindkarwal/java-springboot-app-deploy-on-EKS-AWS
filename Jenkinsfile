@@ -53,7 +53,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'docker_hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                      }
-                    sh 'docker buildx build -t ${DOCKER_IMAGE}:${DOCKER_TAG} --push .'
+                    sh 'docker buildx build --platform linux/amd64,linux/arm64 -t ${DOCKER_IMAGE}:${DOCKER_TAG} --push .'
                 }
             }
         }

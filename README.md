@@ -1,3 +1,3 @@
 Project Architecture
 
-![Image](https://github.com/user-attachments/assets/dfe9c8f7-70f8-4d04-87f9-9503f8e2c22a)
+![Image](https://github.com/user-attachments/assets/f294da1e-1e1b-4c05-aa9a-047ca06c95eb)

@@ -22,9 +22,11 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 - **CI/CD**: Jenkins, ArgoCD (GitOps), SonarQube, JUnit
 - **Containerization**: Docker
 - **Container Orchestration**: Kubernetes (AWS EKS), Helm
-- **Cloud Infrastructure**: AWS (EC2, VPC, Route 53)
+- **Cloud Infrastructure**: AWS (EC2, VPC, Route 53, IAM)
 - **Cloud Networking**: VPC, EC2 components, Traffic Routing
 - **CI Tools**: Jenkins for Continuous Integration and Delivery
 - **Monitoring and Security**: SonarQube for code quality, AWS CloudWatch for monitoring
 - **DNS Configuration**: Route53 for DNS configuration (www.flowci.in/ and www.flowci.in/about)
 - **Scripting & Troubleshooting**: Linux commands, troubleshooting skills
+
+> **Note**: The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.

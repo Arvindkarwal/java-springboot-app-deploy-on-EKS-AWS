@@ -29,8 +29,11 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 - **DNS Configuration**: Route53 for DNS configuration (www.flowci.in/ and www.flowci.in/about)
 - **Scripting & Troubleshooting**: Linux commands, troubleshooting skills
 
+
 > **Note**: The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.
 
+
+**Screenshot of Live App**
 
 <img width="1467" alt="Image" src="https://github.com/user-attachments/assets/816747f0-f57b-4efe-82ee-da83edc6f0f5" />
 <img width="1464" alt="Image" src="https://github.com/user-attachments/assets/58db069a-f502-4513-bb11-c6768e72ec99" />

@@ -12,7 +12,7 @@ By showcasing this project, I aim to exhibit my hands-on experience with **autom
 
 ## Purpose
 
-The main objective of this project is to set up a fully automated **CI/CD pipeline** for a Java Spring Boot-based application using popular tools in the DevOps ecosystem. This will include deploying the app in a **Kubernetes (EKS)** cluster on **AWS** and utilizing **Helm** for Kubernetes resource management, **ArgoCD** for GitOps, and **Docker** for containerization. I also aim to showcase best practices in cloud infrastructure, security, monitoring, and troubleshooting.
+The main objective of this project is to set up a fully automated **CI/CD pipeline** for a Java Spring Boot-based application using popular tools in the DevOps ecosystem. This will include deploying the app in a **Kubernetes (EKS)** cluster on **AWS** and utilizing **Helm** for Kubernetes resource management, **ArgoCD** for GitOps, and **Docker** for containerization. I also aim to showcase best practices in cloud infrastructure and troubleshooting.
 
 ## Technologies and Tools Used
 
@@ -24,8 +24,8 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 - **Container Orchestration**: Kubernetes (AWS EKS), Helm
 - **Cloud Infrastructure**: AWS (EC2, VPC, Route 53, IAM)
 - **Cloud Networking**: VPC, EC2 components, Traffic Routing
-- **CI Tools**: Jenkins for Continuous Integration and Delivery
-- **Monitoring and Security**: SonarQube for code quality, AWS CloudWatch for monitoring
+- **CI Tools**: Jenkins for Continuous Integration
+- **Static Analysis**: SonarQube for code quality
 - **DNS Configuration**: Route53 for DNS configuration (www.flowci.in/ and www.flowci.in/about)
 - **Scripting & Troubleshooting**: Linux commands, troubleshooting skills
 

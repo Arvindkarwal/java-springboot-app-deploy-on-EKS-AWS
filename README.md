@@ -2,7 +2,7 @@
 
 ![Image](https://github.com/user-attachments/assets/6b7cf0b4-e83c-42d2-a7eb-004bfdba2dc6)
 
-
+ - [App Screenshot link](https://github.com/Arvindkarwal/java-springboot-app-deploy-on-EKS-AWS/blob/dev-branch/README.md#screenshot-of-live-app)
 
 ## Overview
 

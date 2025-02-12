@@ -8,7 +8,7 @@
 
 Welcome to my **DevOps Project** repository! This project is designed to demonstrate my proficiency in various **DevOps tools** and **technologies** that I have learned and applied throughout my journey. The primary goal of this project is to deploy a **Contact Manager App** built with **Java Spring Boot** using modern DevOps practices and tools.
 
-By showcasing this project, I aim to exhibit my hands-on experience with continuous integration and deployment (CI/CD), containerization, cloud infrastructure, and GitOps principles, all of which are critical for the DevOps role.
+By showcasing this project, I aim to exhibit my hands-on experience with **automated continuous integration and deployment (CI/CD), containerization, cloud infrastructure, and GitOps principles, all of which are critical for the DevOps role.**
 
 ## Purpose
 

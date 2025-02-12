@@ -36,7 +36,10 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 
 
 
-> **Note**: The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.
+
+## Note
+
+The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.
 
 
 

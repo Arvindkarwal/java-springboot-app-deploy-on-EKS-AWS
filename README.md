@@ -29,6 +29,8 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 - **DNS Configuration**: Route53 for DNS configuration (www.flowci.in/ and www.flowci.in/about)
 - **Scripting & Troubleshooting**: Linux commands, troubleshooting skills
 
+## [Helm Chart Repo](https://github.com/Arvindkarwal/helm_chart.git)
+
 
 > **Note**: The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.
 

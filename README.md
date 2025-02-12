@@ -30,3 +30,11 @@ This project involves using a wide range of **DevOps tools and technologies**, w
 - **Scripting & Troubleshooting**: Linux commands, troubleshooting skills
 
 > **Note**: The deployed website was removed from the internet to manage ongoing infrastructure costs after fulfilling purpose.
+
+
+<img width="1467" alt="Image" src="https://github.com/user-attachments/assets/816747f0-f57b-4efe-82ee-da83edc6f0f5" />
+<img width="1464" alt="Image" src="https://github.com/user-attachments/assets/58db069a-f502-4513-bb11-c6768e72ec99" />
+<img width="1460" alt="Image" src="https://github.com/user-attachments/assets/ed7ef944-1a86-4a9f-b569-bd051ddda693" />
+<img width="1410" alt="Image" src="https://github.com/user-attachments/assets/76c84229-f350-4bc6-a686-be67ab0ec3a8" />
+<img width="1469" alt="Image" src="https://github.com/user-attachments/assets/cdde46cb-1160-45d8-af8f-01ee702959a8" />
+<img width="1456" alt="Image" src="https://github.com/user-attachments/assets/f2d1033c-8a89-4419-8eef-8f5be88e27fb" />

@@ -1,13 +1,12 @@
-package in.flowci.contactcontroller;
+package in.flowci.service;
 
 import in.flowci.model.contact;
-import in.flowci.service.contactService;
+import in.flowci.repository.contactRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.ui.Model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,16 +14,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class contactControllerTest {
+class ContactServiceTest {
 
     @Mock
-    private contactService service;
-
-    @Mock
-    private Model model;
+    private contactRepository repository;
 
     @InjectMocks
-    private contactController controller;
+    private contactService service;
 
     @BeforeEach
     void setUp() {
@@ -32,30 +28,21 @@ class contactControllerTest {
     }
 
     @Test
-    void testHome() {
+    void testGetAllContacts() {
         // Arrange
         List<contact> contacts = Arrays.asList(
                 new contact("John Doe", "john@example.com", "1234567890"),
                 new contact("Jane Doe", "jane@example.com", "0987654321")
         );
-        when(service.getAllContacts()).thenReturn(contacts);
+        when(repository.getAllContacts()).thenReturn(contacts);
 
         // Act
-        String viewName = controller.home(model);
+        List<contact> result = service.getAllContacts();
 
         // Assert
-        assertEquals("index", viewName);
-        verify(model).addAttribute("contacts", contacts);
-        verify(service).getAllContacts();
-    }
-
-    @Test
-    void testAbout() {
-        // Act
-        String viewName = controller.about();
-
-        // Assert
-        assertEquals("about", viewName);
+        assertEquals(2, result.size());
+        assertEquals("John Doe", result.get(0).getName());
+        verify(repository).getAllContacts();
     }
 
     @Test
@@ -64,11 +51,10 @@ class contactControllerTest {
         contact newContact = new contact("John Doe", "john@example.com", "1234567890");
 
         // Act
-        String viewName = controller.addContact(newContact);
+        service.addContact(newContact);
 
         // Assert
-        assertEquals("redirect:/", viewName);
-        verify(service).addContact(newContact);
+        verify(repository).addContact(newContact);
     }
 
     @Test
@@ -77,10 +63,9 @@ class contactControllerTest {
         contact contactToDelete = new contact("John Doe", "john@example.com", "1234567890");
 
         // Act
-        String viewName = controller.deleteContact(contactToDelete);
+        service.deleteContact(contactToDelete);
 
         // Assert
-        assertEquals("redirect:/", viewName);
-        verify(service).deleteContact(contactToDelete);
+        verify(repository).deleteContact(contactToDelete);
     }
 }

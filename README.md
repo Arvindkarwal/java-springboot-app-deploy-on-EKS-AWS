@@ -1,6 +1,6 @@
 # High Level Project Architecture - Contact Manager App Deployment
 
-![Image](https://github.com/user-attachments/assets/bc2cb156-1ec8-49e1-95ba-961c81d60fb5)
+![Image](https://github.com/user-attachments/assets/46f315ad-9ecf-4aab-bb59-024f97e04fc6)
 
 ## [App Screenshot link](https://github.com/Arvindkarwal/java-springboot-app-deploy-on-EKS-AWS/blob/dev-branch/README.md#screenshot-of-live-app)
 

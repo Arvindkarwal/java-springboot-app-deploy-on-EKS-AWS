@@ -11,7 +11,7 @@ on:
 env:
   DOCKER_IMAGE: arvind005/java-app
   GIT_REPO: https://github.com/your-username/your-repo.git
-  HELM_CHART_PATH: helm_chart/Java_Application
+  HELM_CHART_PATH: Java_Application
   SONAR_HOST_URL: http://54.167.141.49:9000
   SONAR_PROJECT_KEY: in.flowci.Java_Application
 

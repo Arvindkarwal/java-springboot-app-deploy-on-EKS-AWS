@@ -49,7 +49,7 @@ jobs:
           mvn sonar:sonar \
             -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
             -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-            -Dsonar.token=${{ env.SONAR_AUTH_TOKEN }}
+            -Dsonar.login=${{ env.SONAR_AUTH_TOKEN }}
 
   test:
     runs-on: ubuntu-latest

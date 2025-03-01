@@ -99,7 +99,7 @@ jobs:
       - name: Checkout Helm Chart Repo
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/Arvindkarwal/helm_chart.git
+          repository: Arvindkarwal/helm_chart
           token: ${{ secrets.GIT_PAT }}
 
       - name: Set Build Number

@@ -76,9 +76,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Dependencies
-        run: sudo apt update && sudo apt install -y docker.io
-
       - name: Setup Buildx
         run: docker buildx create --use --name multiarch-builder
 

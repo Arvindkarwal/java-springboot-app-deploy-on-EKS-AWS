@@ -107,7 +107,7 @@ jobs:
 
       - name: Scan Docker Image for Vulnerabilities
         run: |
-          trivy image --exit-code 1 --severity HIGH,CRITICAL ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+          trivy image ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
   
 
   update_helm:

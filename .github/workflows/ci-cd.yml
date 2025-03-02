@@ -91,6 +91,27 @@ jobs:
       - name: Build and Push Docker Image
         run: docker buildx build -t ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }} --push .
 
+  trivy_scan:
+    runs-on: ubuntu-latest
+    needs: docker_build_push
+
+    steps:
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_Linux-64bit.tar.gz
+          tar -xvf trivy_Linux-64bit.tar.gz
+          sudo mv trivy /usr/local/bin/
+
+      - name: Set Build Number
+        run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Scan Docker Image for Vulnerabilities
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+  
+
   update_helm:
     runs-on: ubuntu-latest
     needs: docker_build_push

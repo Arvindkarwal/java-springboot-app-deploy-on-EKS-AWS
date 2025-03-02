@@ -100,14 +100,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wget curl
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
       - name: Set Build Number
         run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Scan Docker Image for Vulnerabilities
         run: |
-          trivy image ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+          trivy image --exit-code 1 --severity HIGH,CRITICAL ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
   
 
   update_helm:

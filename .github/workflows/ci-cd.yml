@@ -99,10 +99,8 @@ jobs:
       - name: Install Trivy
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget
-          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_Linux-64bit.tar.gz
-          tar -xvf trivy_Linux-64bit.tar.gz
-          sudo mv trivy /usr/local/bin/
+          sudo apt-get install -y wget curl
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh
 
       - name: Set Build Number
         run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV

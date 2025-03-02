@@ -1,0 +1,138 @@
+name: Java CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - ga-main
+  pull_request:
+    branches:
+      - ga-main
+
+env:
+  DOCKER_IMAGE: arvind005/java-app
+  GIT_REPO: https://github.com/your-username/your-repo.git
+  HELM_CHART_PATH: Java_Application
+  SONAR_HOST_URL: http://54.90.183.23:9000
+  SONAR_PROJECT_KEY: in.flowci.Java_Application
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: maven:3.9-eclipse-temurin-21-alpine
+      options: --user root -v /var/run/docker.sock:/var/run/docker.sock
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Build Number
+        run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Build with Maven
+        run: mvn clean install
+
+  sonar_scan:
+    runs-on: ubuntu-latest
+    needs: build
+    container:
+      image: maven:3.9-eclipse-temurin-21-alpine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_AUTH_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn sonar:sonar \
+            -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
+            -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ env.SONAR_AUTH_TOKEN }} \
+            -Dsonar.java.binaries=target/classes
+
+  test:
+    runs-on: ubuntu-latest
+    needs: sonar_scan
+    container:
+      image: maven:3.9-eclipse-temurin-21-alpine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Tests
+        run: mvn test
+
+  docker_build_push:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Buildx
+        run: docker buildx create --use --name multiarch-builder
+
+      - name: Login to Docker Hub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+      - name: Set Build Number
+        run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Build and Push Docker Image
+        run: docker buildx build -t ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }} --push .
+
+  trivy_scan:
+    runs-on: ubuntu-latest
+    needs: docker_build_push
+
+    steps:
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget curl
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
+
+      - name: Set Build Number
+        run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Scan Docker Image for Vulnerabilities
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL ${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+  
+
+  update_helm:
+    runs-on: ubuntu-latest
+    needs: trivy_scan
+
+    steps:
+      - name: Checkout Helm Chart Repo
+        uses: actions/checkout@v4
+        with:
+          repository: Arvindkarwal/helm_chart
+          token: ${{ secrets.GIT_PAT }}
+
+      - name: Set Build Number
+        run: echo "DOCKER_TAG=ga${{ github.run_number }}" >> $GITHUB_ENV
+
+      - name: Update Helm Chart Image Tag
+        run: |
+          sed -i '/image:/,/^[^ ]/ s|tag:.*|tag: ${{ env.DOCKER_TAG }}|' \
+          ${{ env.HELM_CHART_PATH }}/values.yaml
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "Arvindkarwal"
+          git config --global user.email "arvindkarwal002@gmail.com"
+          git add .
+          git commit -m "Update Docker image tag to ${{ env.DOCKER_TAG }}"
+          git push
